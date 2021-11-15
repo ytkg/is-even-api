@@ -9,10 +9,17 @@ describe('handle', () => {
     jest.resetModules()
   })
 
-  test('handle GET', async () => {
-    const result = await handleRequest(new Request('/', { method: 'GET' }))
+  test('handle /5', async () => {
+    const result = await handleRequest(new Request('/5', { method: 'GET' }))
     expect(result.status).toEqual(200)
-    const text = await result.text()
-    expect(text).toEqual('request method: GET')
+    const json = await result.json()
+    expect(json).toEqual({ iseven: false })
+  })
+
+  test('handle /6', async () => {
+    const result = await handleRequest(new Request('/6', { method: 'GET' }))
+    expect(result.status).toEqual(200)
+    const json = await result.json()
+    expect(json).toEqual({ iseven: true })
   })
 })
